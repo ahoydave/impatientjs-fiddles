@@ -29,3 +29,18 @@ test('Array from an objects properties', () => {
     const obj = { a: 1, b: 2, c: 3 };
     expect(Array.from(Object.entries(obj))).toEqual([['a', 1], ['b', 2], ['c', 3]]);
 });
+
+test('Fill with primitives', () => {
+    expect([].fill(1, 0, 3)).not.toEqual([1, 1, 1]);
+    expect(Array(3).fill(1)).toEqual([1, 1, 1]);
+});
+
+test('Fill with objects', () => {
+    let arr = Array(3).fill({});
+    arr[0].a = 1;
+    expect(arr).toEqual([{a: 1}, {a: 1}, {a: 1}]);
+    // can use an array-like object combined with the map operation in .from
+    let arr2 = Array.from({length: 3}, () => ({}));  // don't forget the () to differentiate obj literal from code block
+    arr2[0].a = 1;
+    expect(arr2).toEqual([{a: 1}, {}, {}]);
+})
