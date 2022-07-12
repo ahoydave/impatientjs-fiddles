@@ -61,6 +61,13 @@ test('Sets have .entries, .values and .keys similar to Map', () => {
     expect([...s1.keys()]).toEqual(['a', 'b']);
     expect([...s1.values()]).toEqual(['a', 'b']);
     expect([...s1.entries()]).toEqual([['a', 'a'], ['b', 'b']]);
-})
+});
 
 // Weak sets also exist and work almost exactly the same as WeakMaps
+
+test('Sets are equal if they have the same elements', () => {
+    const s1 = new Set(['a', 'b']);
+    const s2 = new Set(['b', 'a']);
+    expect(s1).toEqual(s2);
+    expect([...s1]).not.toEqual([...s2]);
+});
